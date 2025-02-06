@@ -1,53 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouterModule, provideRouter, withComponentInputBinding } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BackgroundComponent } from './components/background.component';
 import { animate, style, transition, trigger } from '@angular/animations';
-
 
 // Components
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, BackgroundComponent],
   template: `
-    <section class="section" @fadeIn>
-      <div class="container">
-        <h1 class="hero-title">Olá, eu sou Alexandre Baccarini,<br>desenvolvedor web e de software.</h1>
-        <p class="hero-subtitle">Construindo soluções eficientes e escaláveis com tecnologia de ponta.</p>
+    <app-background></app-background>
+    <section class="min-h-screen flex items-center justify-center relative">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
+          Olá, eu sou Alexandre Baccarini
+        </h1>
+        <p class="text-xl md:text-2xl text-secondary mb-8">
+          Desenvolvedor web e de software especializado em criar experiências digitais excepcionais.
+        </p>
+        <div class="flex justify-center gap-4">
+          <a href="#projects" class="px-8 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors">
+            Ver Projetos
+          </a>
+          <a href="#contact" class="px-8 py-3 border-2 border-accent text-accent rounded-lg hover:bg-accent/10 transition-colors">
+            Contato
+          </a>
+        </div>
       </div>
     </section>
-  `,
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ],
-  styles: [`
-    .hero-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-    .hero-subtitle {
-      font-size: 1.5rem;
-      color: var(--secondary-color);
-    }
-    @media (max-width: 768px) {
-      .hero-title {
-        font-size: 2rem;
-      }
-      .hero-subtitle {
-        font-size: 1.25rem;
-      }
-    }
-  `]
+  `
 })
 export class HomeComponent {}
 
