@@ -1,14 +1,21 @@
 # Portfolio Dev
 
-Este é um portfólio de desenvolvimento pessoal, criado para demonstrar habilidades e projetos.
+Este é um portfólio pessoal, criado para apresentar um pouco sobre mim e meus conhecimentos. Além de mostrar meus projetos.
+
+## 📚 Seções
+
+- **Sobre mim:** Contém uma descrição dizendo um pouco sobre quem sou
+- **Skills:** Apresento meus conhecimentos em algumas tecnologias
+- **Projetos:** Exibe alguns projetos desenvolvidos, descricao e links
+- **Contato:** Informações de contato
 
 ## 💻 Tecnologias Usadas
 
-- **Angular**: Framework de desenvolvimento web utilizado para criar a estrutura da aplicação.
-- **TypeScript**: Linguagem utilizada para garantir uma tipagem estática e a detecção de erros durante o desenvolvimento.
-- **Tailwind CSS**: Framework de CSS utilitário para estilizar a aplicação de forma rápida e eficiente.
-- **FontAwesome**: Biblioteca de ícones para melhorar a interface do usuário.
-- **HTML/CSS**: Para a construção e estilização das páginas web.
+- **HTML/CSS**: Para a construção e estilização das páginas web
+- **TypeScript**: Linguagem utilizada para scripts
+- **Angular**: Framework de desenvolvimento web utilizado para criar a estrutura da aplicação
+- **Tailwind CSS**: Framework de CSS para estilizar a aplicação de forma rápida e eficiente
+- **FontAwesome**: Biblioteca de ícones
 
 ## 🚀 Development server
 
