@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title>Alexandre Baccarini</title>
+    <title>Portfólio | Alexandre Baccarini</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <meta name="description" content="Portfolio de Alexandre Baccarini - Desenvolvedor Web e Software especializado em criar soluções eficientes e escaláveis." />
-    <meta name="keywords" content="desenvolvedor web, software developer, angular, typescript, node.js, portfolio" />
-    <meta name="author" content="Alexandre Baccarini" />
-    <meta property="og:title" content="Alexandre Baccarini - Desenvolvedor Web & Software" />
-    <meta property="og:description" content="Portfolio de Alexandre Baccarini" />
-    <meta property="og:type" content="website" />
+    <meta name="description" content="Desenvolvedor Full-Stack especializado em criar soluções web modernas e inovadoras." />
     <base href="/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
   </head>
+
   <body>
-    <app-root></app-root>
+    <app-root>
+      <div style="
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f7fafc;
+      ">
+        <div style="
+          width: 40px;
+          height: 40px;
+          border: 3px solid #4f46e5;
+          border-radius: 50%;
+          border-top-color: transparent;
+          animation: spin 1s linear infinite;
+        "></div>
+      </div>
+      <style>
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      </style>
+    </app-root>
   </body>
 </html>

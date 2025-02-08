@@ -4,7 +4,7 @@ import { RouterModule, provideRouter, withComponentInputBinding } from '@angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger, query, stagger } from '@angular/animations';
 
 // Components
 @Component({
@@ -12,32 +12,38 @@ import { animate, style, transition, trigger } from '@angular/animations';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="section" @fadeIn>
+    <section class="section hero" @fadeIn>
       <div class="container">
-        <p class="hero-subtitle">hello world!</p>
-        <h1 class="hero-title">Eu sou Alexandre Baccarini,<br>Desenvolvedor Full-Stack</h1>
-        <p class="hero-subtitle">
-          Minha trajetória começou em 2019, quando iniciei o Curso Técnico de Informática no IFRO, 
-          logo em seguida entrei na faculdade UTFPR-CM cursando Bacharelado em Ciência da computação.<br> 
-          Atualmente estou no mercado de trabalho, buscando evoluir e expandir meus conhecimentos e explorando novas tecnologias!
-        </p>
-        <br><br>
-        <div class="social-buttons">
-          <a href="mailto:AlexandreBaccaJr@gmail.com" class="social-btn email">
-            <i class="fas fa-envelope"></i> E-mail
-          </a><br>
-          <a href="https://wa.me/+5569981621415?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20seu%20trabalho!" target="_blank" class="social-btn whatsapp">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </a><br>
-          <a href="https://github.com/AleKK31" target="_blank" class="social-btn github">
-            <i class="fab fa-github"></i> GitHub
-          </a><br>
-          <a href="https://linkedin.com/in/alexandrebacca31" target="_blank" class="social-btn linkedin">
-            <i class="fab fa-linkedin"></i> LinkedIn
-          </a><br>
-          <a href="public/cv-alexandre.pdf" download class="social-btn cv">
-            <i class="fas fa-download"></i> Download CV
-          </a>
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="text-gradient">Alexandre Baccarini</span>
+            Desenvolvedor <br> Full-Stack
+          </h1>
+          <p class="hero-description">
+            Desenvolvedor apaixonado por criar soluções inovadoras e experiências digitais excepcionais. 
+            Com formação em Ciência da Computação pela UTFPR-CM e experiência técnica desde 2019, 
+            estou sempre em busca de novos desafios e oportunidades para expandir meus horizontes tecnológicos.
+          </p>
+          <div class="hero-cta">
+            <a routerLink="/contact" class="btn btn-primary">Entre em Contato</a>
+            <a href="public/cv-alexandre.pdf" download class="btn btn-secondary">
+              <i class="fas fa-download"></i> Download CV
+            </a>
+          </div>
+          <div class="social-links">
+            <a href="https://linkedin.com/in/alexandrebacca31" target="_blank" class="social-link linkedin">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:AlexandreBaccaJr@gmail.com" class="social-link email">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://wa.me/+5569981621415" target="_blank" class="social-link whatsapp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://github.com/AleKK31" target="_blank" class="social-link github">
+              <i class="fab fa-github"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -45,68 +51,121 @@ import { animate, style, transition, trigger } from '@angular/animations';
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        query('.hero-content > *', [
+          style({ opacity: 0, transform: 'translateY(20px)' }),
+          stagger(100, [
+            animate('0.6s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+          ])
+        ])
       ])
     ])
   ],
   styles: [`
-    .hero-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
-    }
-    .hero-subtitle {
-      font-size: 1.5rem;
-      color: var(--secondary-color);
-    }
-
-    .social-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .social-btn {
+    .hero {
+      min-height: calc(100vh - 70px);
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      font-size: 1rem;
-      font-weight: bold;
+      background: linear-gradient(135deg, #f6f7f9 0%, #ffffff 100%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.25rem;
+      color: var(--secondary-color);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      font-weight: 600;
       text-decoration: none;
-      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--accent-color);
       color: white;
-      transition: 0.3s ease-in-out;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      min-width: 180px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
       justify-content: center;
     }
 
-    .linkedin { background-color: #0077b5; }
-    .github { background-color: #333; }
-    .whatsapp { background-color: #25D366; }
-    .email { background-color: rgb(233, 56, 56); }
-    .cv { background-color: rgb(243, 144, 31); }
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+      transition: all 0.3s ease;
+    }
 
-    .social-btn:hover {
-      filter: brightness(1.2);
-      transform: scale(1.05);
+    .github { background: #333; }
+    .linkedin { background: #0077b5; }
+    .email { background: #ea4335; }
+    .whatsapp { background: #25D366; }
+
+    .social-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     @media (max-width: 768px) {
       .hero-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
-      .hero-subtitle {
-        font-size: 1.25rem;
+
+      .hero-description {
+        font-size: 1.1rem;
       }
-      .social-buttons {
+
+      .hero-cta {
         flex-direction: column;
-        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
       }
     }
   `]
@@ -144,6 +203,9 @@ export class HomeComponent {}
       grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
       gap: 3rem;
       justify-content: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
     }
     .skill-card {
       position: relative;
@@ -155,6 +217,7 @@ export class HomeComponent {}
       background: #1e293b;
       border-radius: 0.5rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin: 0 auto;
     }
     .skill-card:hover {
       transform: scale(1.1);
@@ -183,44 +246,59 @@ export class HomeComponent {}
       opacity: 1;
       bottom: -35px;
     }
+    @media (max-width: 768px) {
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+      }
+      .skill-card {
+        width: 70px;
+        height: 70px;
+      }
+      .skill-icon {
+        font-size: 2rem;
+      }
+    }
   `]
 })
 export class SkillsComponent {
   skills = [
     // Linguagens de Programação
-    { name: 'C#', icon: '<i class="fab fa-cuttlefish"></i>' },            //achar
-    { name: 'C++', icon: '<i class="fab fa-cuttlefish"></i>' },           //achar
-    { name: 'C', icon: '<i class="fab fa-cuttlefish"></i>' },             //achar
-    { name: 'Java', icon: '<i class="fab fa-java"></i>' },
-    { name: 'JavaScript', icon: '<i class="fab fa-js"></i>' },
-    { name: 'TypeScript', icon: '<i class="fab fa-js"></i>' },            //achar
+    { name: 'C', icon: '<i class="devicon-c-plain"></i>' },
+    { name: 'C++', icon: '<i class="devicon-cplusplus-plain"></i>' },
+    { name: 'C#', icon: '<i class="devicon-csharp-plain"></i>' },
+    { name: 'Java', icon: '<i class="devicon-java-plain"></i>' },
+    { name: 'JavaScript', icon: '<i class="devicon-javascript-plain"></i>' },
+    { name: 'TypeScript', icon: '<i class="devicon-typescript-plain"></i>' },
 
     // Frameworks e Bibliotecas
-    { name: '.NET', icon: '<i class="fab fa-microsoft"></i>' },           //achar
-    { name: 'SpringBoot', icon: '<i class="fas fa-cogs"></i>' },
-    { name: 'Node.js', icon: '<i class="fab fa-node"></i>' },
-    { name: 'React', icon: '<i class="fab fa-react"></i>' },
-    { name: 'Angular', icon: '<i class="fab fa-angular"></i>' },
-    { name: 'Ionic', icon: '<i class="fa-solid fa-circle-notch"></i>' },  //achar
+    { name: '.NET', icon: '<i class="devicon-dotnetcore-plain"></i>' },
+    { name: 'SpringBoot', icon: '<i class="devicon-spring-original"></i>' },
+    { name: 'Node.js', icon: '<i class="devicon-nodejs-plain"></i>' },
+    { name: 'React', icon: '<i class="devicon-react-original"></i>' }, 
+    { name: 'Angular', icon: '<i class="devicon-angularjs-plain"></i>' },
+    { name: 'Ionic', icon: '<i class="devicon-ionic-original"></i>' },
 
     // Ferramentas e Estilos
-    { name: 'Bootstrap', icon: '<i class="fab fa-bootstrap"></i>' },
-    { name: 'Tailwind', icon: '<i class="fas fa-water"></i>' },
-    { name: 'Figma', icon: '<i class="fab fa-figma"></i>' },
+    { name: 'Bootstrap', icon: '<i class="devicon-bootstrap-plain"></i>' },
+    { name: 'Tailwind', icon: '<i class="devicon-tailwindcss-plain"></i>' },
+    { name: 'Figma', icon: '<i class="devicon-figma-plain"></i>' },
 
     // Banco de Dados
-    { name: 'MySQL', icon: '<i class="fa-solid fa-database"></i>' },      //achar
-    { name: 'SQL Server', icon: '<i class="fa-solid fa-dna"></i>' },      //achar
-    { name: 'PostgreSQL', icon: '<i class="fa-solid fa-database"></i>' }, //achar
+    { name: 'MySQL', icon: '<i class="devicon-mysql-plain"></i>' },
+    { name: 'SQL Server', icon: '<i class="devicon-microsoftsqlserver-plain"></i>' },
+    { name: 'PostgreSQL', icon: '<i class="devicon-postgresql-plain"></i>' },
+    { name: 'MongoDB', icon: '<i class="devicon-mongodb-plain"></i>' },
 
     // CMS
-    { name: 'WordPress', icon: '<i class="fab fa-wordpress"></i>' },
+    { name: 'WordPress', icon: '<i class="devicon-wordpress-plain"></i>' }, 
     { name: 'Elementor', icon: '<i class="fab fa-elementor"></i>' },
 
     // Controle de Versão
-    { name: 'Git', icon: '<i class="fab fa-git"></i>' },
-    { name: 'GitHub', icon: '<i class="fab fa-github"></i>' },
-    { name: 'GitLab', icon: '<i class="fab fa-gitlab"></i>' }
+    { name: 'Git', icon: '<i class="devicon-git-plain"></i>' }, 
+    { name: 'GitHub', icon: '<i class="devicon-github-original"></i>' }, 
+    { name: 'GitLab', icon: '<i class="devicon-gitlab-plain"></i>' } 
   ];
 }
 
@@ -242,8 +320,12 @@ export class SkillsComponent {
                 <span *ngFor="let tech of project.technologies">{{tech}}</span>
               </div>
               <div class="project-links">
-                <a [href]="project.demo" target="_blank" class="project-link">Deploy</a>
-                <a [href]="project.github" target="_blank" class="project-link">GitHub</a>
+                <a [href]="project.demo" target="_blank" class="project-link">
+                  <i class="fas fa-external-link-alt"></i> Deploy
+                </a>
+                <a [href]="project.github" target="_blank" class="project-link">
+                  <i class="fab fa-github"></i> GitHub
+                </a>
               </div>
             </div>
           </div>
@@ -270,34 +352,44 @@ export class SkillsComponent {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
+      padding: 2rem 0;
     }
     .project-card {
-      border-radius: 8px;
+      border-radius: 12px;
       background: white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       overflow: hidden;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .project-card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
     }
     .project-image {
       height: 200px;
       background-size: cover;
       background-position: center;
+      border-bottom: 1px solid #edf2f7;
     }
     .project-content {
       padding: 1.5rem;
     }
     .project-content h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
       margin-bottom: 1rem;
       color: var(--primary-color);
     }
+    .project-content p {
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
     .tech-stack {
-      margin: 1rem 0;
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
     .tech-stack span {
       padding: 0.25rem 0.75rem;
@@ -305,24 +397,33 @@ export class SkillsComponent {
       color: white;
       border-radius: 999px;
       font-size: 0.875rem;
+      font-weight: 500;
     }
     .project-links {
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
     }
     .project-link {
       padding: 0.5rem 1rem;
       border: 2px solid var(--accent-color);
-      border-radius: 4px;
+      border-radius: 6px;
       color: var(--accent-color);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     .project-link:hover {
       background: var(--accent-color);
       color: white;
+    }
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
     }
   `]
 })
@@ -331,26 +432,18 @@ export class ProjectsComponent {
     {
       title: 'Short URL',
       description: 'Um encurtador de URL simples, prático e totalmente gratuito, para transformar links longos em URLs curtas e fáceis de compartilhar',
-      technologies: ['JavaScript', 'CSS', 'HTML', 'Rebrandly API'],
-      image: 'https://private-user-images.githubusercontent.com/113646121/364115655-4f194aa2-c1b9-47d4-8748-2bd67309d102.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3Mzg4MTIwMTksIm5iZiI6MTczODgxMTcxOSwicGF0aCI6Ii8xMTM2NDYxMjEvMzY0MTE1NjU1LTRmMTk0YWEyLWMxYjktNDdkNC04NzQ4LTJiZDY3MzA5ZDEwMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwNlQwMzE1MTlaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mZjg4YzYzYzM0ZWY4ODQ4YmQ3ODY2ZjExMGE0MjM1MTA2NzlkZjZlZGQ2MTAxOGM3N2IzMzI2ZTQ3YWJlNWYzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.b44xI_xlQ9tLJwzCu_gwjl-F-SdTk7lHSigZpQO00ho',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Rebrandly API'],
+      image: 'https://private-user-images.githubusercontent.com/113646121/364115655-4f194aa2-c1b9-47d4-8748-2bd67309d102.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzkwNTIzNjMsIm5iZiI6MTczOTA1MjA2MywicGF0aCI6Ii8xMTM2NDYxMjEvMzY0MTE1NjU1LTRmMTk0YWEyLWMxYjktNDdkNC04NzQ4LTJiZDY3MzA5ZDEwMi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwMjA4JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDIwOFQyMjAxMDNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jOWYyNjI1OGZmNDRlNmZkNTllMDg2M2JmYmQ3MDJmODcyZWNmM2IzMjQ0MWNlN2M0NzA0MmI5MmFiZWNkNDFjJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.Yp_xSvSHb4-kY9X0M89Ruo6wnjR_BieUA8AqjAn7Rrw',
       demo: 'https://alekk31.github.io/ShortURL/',
       github: 'https://github.com/AleKK31/ShortURL'
     },
     {
-      title: 'Em Breve',
-      description: ' ',
-      technologies: [],
-      image: 'https://via.placeholder.com/400x200',
-      demo: 'https://example.com',
-      github: 'https://github.com'
-    },
-    {
-      title: 'Em Breve',
-      description: ' ',
-      technologies: [],
-      image: 'https://via.placeholder.com/400x200',
-      demo: 'https://example.com',
-      github: 'https://github.com'
+      title: 'BoxTree',
+      description: 'BoxTree é um novo formato de link trees, inspirada no conceito de bento box.',
+      technologies: ['HTML', 'CSS', 'JavaScript'],
+      image: './public/boxtree.png',
+      demo: 'https://boxtree.vercel.app',
+      github: 'https://github.com/AleKK31/BoxTree'
     }
   ];
 }
@@ -360,31 +453,31 @@ export class ProjectsComponent {
   standalone: true,
   imports: [CommonModule],
   template: `
-    <section class="section" @fadeIn>
+    <section class="section contact" @fadeIn>
       <div class="container">
-        <h1 class="section-title">Entre em contato comigo!</h1>
-        <p class="section-subtitle">
-          Estou sempre disponível para conversar sobre novos projetos, oportunidades e ideias. Você pode entrar em contato por e-mail, WhatsApp ou outras redes sociais!
+        <h2 class="section-title">Entre em Contato</h2>
+        <p class="section-description">
+          Estou sempre disponível para discutir novos projetos, oportunidades criativas ou como posso ajudar você com sua presença digital.
         </p>
         
-        <div class="contact-methods">
-          <div class="contact-method">
-            <a href="mailto:AlexandreBaccaJr@gmail.com" class="contact-btn email">
-              <i class="fas fa-envelope"></i> Enviar E-mail
-            </a>
-          </div>
+        <div class="contact-grid">
+          <a href="mailto:AlexandreBaccaJr@gmail.com" class="contact-card email">
+            <i class="fas fa-envelope"></i>
+            <h3>E-mail</h3>
+            <p>AlexandreBaccaJr&#64;gmail.com</p>
+          </a>
           
-          <div class="contact-method">
-            <a href="https://wa.me/+5569981621415?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20seu%20trabalho!" target="_blank" class="contact-btn whatsapp">
-              <i class="fab fa-whatsapp"></i> WhatsApp
-            </a>
-          </div>
+          <a href="https://wa.me/+5569981621415" target="_blank" class="contact-card whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
+            <p>+55 (69) 98162-1415</p>
+          </a>
           
-          <div class="contact-method">
-            <a href="https://linkedin.com/in/alexandrebacca31" target="_blank" class="contact-btn linkedin">
-              <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-          </div>
+          <a href="https://linkedin.com/in/alexandrebacca31" target="_blank" class="contact-card linkedin">
+            <i class="fab fa-linkedin"></i>
+            <h3>LinkedIn</h3>
+            <p>alexandrebacca31</p>
+          </a>
         </div>
       </div>
     </section>
@@ -398,56 +491,62 @@ export class ProjectsComponent {
     ])
   ],
   styles: [`
-    .section-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      line-height: 1.2;
+    .contact {
+      background: linear-gradient(135deg, #f6f7f9 0%, #ffffff 100%);
     }
-    .section-subtitle {
-      font-size: 1.3rem;
+    .section-description {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
       color: var(--secondary-color);
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
-    .contact-methods {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem 0;
     }
-    .contact-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 18px;
-      font-size: 1rem;
-      font-weight: bold;
+    .contact-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
       text-decoration: none;
-      border-radius: 8px;
-      color: white;
-      transition: 0.3s ease-in-out;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      min-width: 180px;
-      justify-content: center;
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .linkedin { background-color: #0077b5; }
-    .whatsapp { background-color: #25D366; }
-    .email { background-color: rgb(233, 56, 56); }
-    .contact-btn:hover {
-      filter: brightness(1.2);
-      transform: scale(1.05);
+    .contact-card i {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
+    .contact-card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      color: var(--secondary-color);
+    }
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    .contact-card.email i { color: #ea4335; }
+    .contact-card.whatsapp i { color: #25D366; }
+    .contact-card.linkedin i { color: #0077b5; }
     @media (max-width: 768px) {
-      .section-title {
-        font-size: 2rem;
+      .section-description {
+        font-size: 1.1rem;
+        padding: 0 1rem;
       }
-      .section-subtitle {
-        font-size: 1.25rem;
-      }
-      .contact-methods {
-        flex-direction: column;
-        align-items: center;
+      .contact-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
       }
     }
   `]
@@ -461,7 +560,9 @@ export class ContactComponent {}
   template: `
     <nav class="nav" [class.nav-scrolled]="isScrolled">
       <div class="container nav-container">
-        <a routerLink="/" class="nav-brand">Alexandre Baccarini</a>
+        <a routerLink="/" class="nav-brand">
+          <span class="text-gradient">AB</span>
+        </a>
         <button class="menu-toggle" (click)="toggleMenu()" [class.active]="isMenuOpen">
           <span></span>
           <span></span>
@@ -478,63 +579,98 @@ export class ContactComponent {}
   `,
   styles: [`
     .nav {
-      background: white;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
+
     .nav-scrolled {
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
     .nav-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 70px;
     }
+
     .nav-brand {
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: var(--primary-color);
+      font-weight: 900;
+      font-size: 2rem;
       text-decoration: none;
     }
+
     .nav-links {
       display: flex;
       gap: 2rem;
     }
+
     .nav-links a {
       color: var(--secondary-color);
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s;
+      position: relative;
+      padding: 0.5rem 0;
     }
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-color);
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-color);
+      transition: width 0.3s ease;
     }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
     .menu-toggle {
       display: none;
-      flex-direction: column;
-      gap: 6px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
     }
-    .menu-toggle span {
-      display: block;
-      width: 25px;
-      height: 2px;
-      background: var(--primary-color);
-      transition: all 0.3s ease;
-    }
+
     @media (max-width: 768px) {
       .menu-toggle {
         display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
       }
+
+      .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 2px;
+        background: var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(8px, 8px);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+      }
+
       .nav-links {
         position: fixed;
         top: 70px;
@@ -548,18 +684,10 @@ export class ContactComponent {}
         opacity: 0;
         transition: all 0.3s ease;
       }
+
       .nav-links.active {
         transform: translateY(0);
         opacity: 1;
-      }
-      .menu-toggle.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 8px);
-      }
-      .menu-toggle.active span:nth-child(2) {
-        opacity: 0;
-      }
-      .menu-toggle.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
       }
     }
   `]
@@ -595,7 +723,7 @@ export class NavComponent {
       [class.visible]="showBackToTop" 
       (click)="scrollToTop()"
       @fadeInOut>
-      ↑
+      <i class="fas fa-arrow-up"></i>
     </button>
   `,
   animations: [
@@ -614,12 +742,13 @@ export class NavComponent {
       margin-top: 70px;
       min-height: calc(100vh - 70px);
     }
+
     .back-to-top {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       background: var(--accent-color);
       color: white;
@@ -628,19 +757,22 @@ export class NavComponent {
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
-      font-size: 1.5rem;
+      font-size: 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
+
     .back-to-top.visible {
       opacity: 1;
       visibility: visible;
     }
+
     .back-to-top:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: var(--accent-color);
+      box-shadow: 0 6px 8px rgba(0,0,0,0.2);
     }
   `]
 })
