@@ -1,8 +1,23 @@
-# PortifolioDev
+# Portfolio Dev
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
+Este é um portfólio pessoal, criado para apresentar um pouco sobre mim e meus conhecimentos. Além de mostrar meus projetos.
 
-## Development server
+## 📚 Seções
+
+- **Sobre mim:** Contém uma descrição dizendo um pouco sobre quem sou
+- **Skills:** Apresento meus conhecimentos em algumas tecnologias
+- **Projetos:** Exibe alguns projetos desenvolvidos, descricao e links
+- **Contato:** Informações de contato
+
+## 💻 Tecnologias Usadas
+
+- **HTML/CSS**: Para a construção e estilização das páginas web
+- **TypeScript**: Linguagem utilizada para scripts
+- **Angular**: Framework de desenvolvimento web utilizado para criar a estrutura da aplicação
+- **Tailwind CSS**: Framework de CSS para estilizar a aplicação de forma rápida e eficiente
+- **FontAwesome**: Biblioteca de ícones
+
+## 🚀 Development server
 
 To start a local development server, run:
 
@@ -35,25 +50,3 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
