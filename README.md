@@ -2,6 +2,8 @@
 
 Este é um portfólio pessoal, criado para apresentar um pouco sobre mim e meus conhecimentos. Além de mostrar meus projetos.
 
+[Deploy](https://alexandrebaccarini.vercel.app)
+
 ## 📚 Seções
 
 - **Sobre mim:** Contém uma descrição dizendo um pouco sobre quem sou
@@ -11,11 +13,12 @@ Este é um portfólio pessoal, criado para apresentar um pouco sobre mim e meus 
 
 ## 💻 Tecnologias Usadas
 
-- **HTML/CSS**: Para a construção e estilização das páginas web
-- **TypeScript**: Linguagem utilizada para scripts
-- **Angular**: Framework de desenvolvimento web utilizado para criar a estrutura da aplicação
-- **Tailwind CSS**: Framework de CSS para estilizar a aplicação de forma rápida e eficiente
-- **FontAwesome**: Biblioteca de ícones
+- **HTML**
+- **CSS**
+- **TypeScript**
+- **Angular**
+- **Tailwind CSS**
+- **FontAwesome**
 
 ## 🚀 Development server
 
