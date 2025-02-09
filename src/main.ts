@@ -20,13 +20,14 @@ import { animate, style, transition, trigger, query, stagger } from '@angular/an
             Desenvolvedor <br> Full-Stack
           </h1>
           <p class="hero-description">
-            Desenvolvedor apaixonado por criar soluções inovadoras e experiências digitais excepcionais. 
-            Com formação em Ciência da Computação pela UTFPR-CM e experiência técnica desde 2019, 
-            estou sempre em busca de novos desafios e oportunidades para expandir meus horizontes tecnológicos.
+            Desenvolvedor fascinado por criar soluções inovadoras e criativas de alta qualidade. 
+            Cursando Ciência da Computação pela UTFPR-CM e experiência técnica desde 2019, 
+            estou sempre em busca de novos desafios e oportunidades para expandir meus conhecimentos e habilidades tecnológicos.
           </p>
           <div class="hero-cta">
-            <a routerLink="/contact" class="btn btn-primary">Entre em Contato</a>
-            <a href="public/cv-alexandre.pdf" download class="btn btn-secondary">
+            <a href="mailto:AlexandreBaccaJr@gmail.com" class="btn btn-primary">Entre em Contato</a>
+            <a href="https://drive.google.com/file/d/1gdz3so2edlzCjzmO3fcAr6jOZnE24AT2/view?usp=download"  target="_blank" rel="noopener noreferrer"
+            class="btn btn-secondary">
               <i class="fas fa-download"></i> Download CV
             </a>
           </div>
